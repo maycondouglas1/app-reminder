@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Reminder
+
+  Created by Maycon Matias on 15/09/25.
+  
+*/
+
+/* MARK - LOGIN Screen */
+
+"login.label.title" = "Entre para acessar as suas receitas";
+"login.email.placeholder" = "email@exemplo.com";
+"login.password.placeholder" = "Insira sua senha";
+"login.button.title" = "Entrar";
+"login.label.emailTextField" = "E-mail";
+"login.label.passwordTextField" = "Senha";

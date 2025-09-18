@@ -10,7 +10,7 @@ import UIKit
 
 class LoginBottomSheetViewController: UIViewController {
     let loginView = LoginBottomSheetView()
-    let handleAreaHeight: CGFloat = 49.0
+    let handleAreaHeight: CGFloat = 50.0
     
     
     override func viewDidLoad() {
@@ -47,6 +47,8 @@ class LoginBottomSheetViewController: UIViewController {
     
     public func animateShow(completion: (() -> Void)? = nil) {
         self.view.layoutIfNeeded()
+        loginView.backgroundColor = .white
+        loginView.layer.cornerRadius = Metrics.tiny
         loginView.transform = CGAffineTransform(translationX: 0, y: loginView.frame.height)
         UIView.animate(withDuration: 0.3, animations: {
             self.loginView.transform = .identity
