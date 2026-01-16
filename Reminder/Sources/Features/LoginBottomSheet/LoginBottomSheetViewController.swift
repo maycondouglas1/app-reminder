@@ -13,7 +13,7 @@ class LoginBottomSheetViewController: UIViewController {
     let contentViewModel = LoginBottomSheetViewModel()
     let handleAreaHeight: CGFloat = 50.0
     public weak var flowDelegate: LoginBottomSheetFlowDelegate?
-
+    
     init(
         contentView: LoginBottomSheetView,
         flowDelegate: LoginBottomSheetFlowDelegate
@@ -22,27 +22,27 @@ class LoginBottomSheetViewController: UIViewController {
         self.contentView = contentView
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         contentView.delegate = self
         setup()
         setupGesture()
         bindViewModel()
     }
-
+    
     private func setup() {
         self.view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         setupConstraints()
     }
-
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(
@@ -52,27 +52,49 @@ class LoginBottomSheetViewController: UIViewController {
             contentView.bottomAnchor.constraint(
                 equalTo: self.view.bottomAnchor),
         ])
-
+        
         let heightConstraint =
-            contentView.heightAnchor.constraint(
-                equalTo: self.view.heightAnchor, multiplier: 0.5
-            ).isActive = true
+        contentView.heightAnchor.constraint(
+            equalTo: self.view.heightAnchor, multiplier: 0.5
+        ).isActive = true
     }
-
+    
     private func bindViewModel() {
-        contentViewModel.successResult = { [weak self] in
-            self?.flowDelegate?.navigateToHome()
+        contentViewModel.successResult = { [weak self] email in
+            self?.presentSaveUserAlert(email: email)
         }
     }
-
+    
+    private func presentSaveUserAlert(email: String) {
+        let alertController = UIAlertController(
+            title: "Salvar Acesso",
+            message: "Deseja salvar o seu acesso?",
+            preferredStyle: .alert
+        )
+        
+        let saveAction = UIAlertAction(title: "Salvar", style: .default) { _ in
+            let user = User(email: email, isUserSaved: true)
+            UserDefaultsManager.saveUser(user: user)
+            self.flowDelegate?.navigateToHome()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Não", style: .cancel) { _ in
+            self.flowDelegate?.navigateToHome()
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
+    }
+    
     private func setupGesture() {
-
+        
     }
-
+    
     private func handlePanGesture() {
-
+        
     }
-
+    
     public func animateShow(completion: (() -> Void)? = nil) {
         self.view.layoutIfNeeded()
         contentView.backgroundColor = .white
