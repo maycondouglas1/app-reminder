@@ -10,11 +10,12 @@ import Firebase
 
 class LoginBottomSheetViewModel {
     var successResult: ((String) -> Void)?
+    var errorLogin: ((String) -> Void)?
     
     func doAuth(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             if let error = error {
-                print("Erro na autenticação: \(error)")
+                self?.errorLogin?(error.localizedDescription)
             } else {
                 self?.successResult?(email)
             }

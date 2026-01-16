@@ -63,6 +63,22 @@ class LoginBottomSheetViewController: UIViewController {
         contentViewModel.successResult = { [weak self] email in
             self?.presentSaveUserAlert(email: email)
         }
+        
+        contentViewModel.errorLogin = { [weak self] message in
+            self?.presentErrorAlert(message: message)
+        }
+    }
+    
+    private func presentErrorAlert (message: String) {
+        let alertController = UIAlertController(
+            title: "Erro ao logar",
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let retryAction = UIAlertAction(title: "Tentar novamente", style: .cancel)
+        alertController.addAction(retryAction)
+        self.present(alertController, animated: true)
     }
     
     private func presentSaveUserAlert(email: String) {
