@@ -24,4 +24,9 @@ class UserDefaultsManager {
         
         return try? decoder.decode(User.self, from: userData)
     }
+    
+    static func removeUser() {
+        UserDefaults.standard.removeObject(forKey: userKey)
+        UserDefaults.standard.synchronize()
+    }
 }

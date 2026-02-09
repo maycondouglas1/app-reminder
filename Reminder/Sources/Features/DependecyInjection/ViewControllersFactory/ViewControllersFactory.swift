@@ -28,4 +28,14 @@ final class ViewControllersFactory: ViewControllersFactoryProtocol {
 
         return loginBottomSheetViewController
     }
+    
+    func makeHomeViewController(
+        flowDelegate: HomeFlowDelegate
+    ) -> HomeViewController {
+        let homeView = HomeView()
+        let homeViewController = HomeViewController(
+            contentView: homeView, flowDelegate: flowDelegate)
+
+        return homeViewController
+    }
 }

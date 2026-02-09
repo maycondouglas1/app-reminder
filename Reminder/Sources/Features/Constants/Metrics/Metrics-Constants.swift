@@ -17,5 +17,6 @@ public struct Metrics {
     public static let cornerRadius: CGFloat = 25
     public static let buttonHeight: CGFloat = 48
     public static let inputHeight: CGFloat = 48
-
+    public static let profileImageSize: CGFloat = 68
+    public static let backgroundProfileSize: CGFloat = 240
 }

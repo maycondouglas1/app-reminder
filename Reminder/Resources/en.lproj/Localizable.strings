@@ -14,3 +14,8 @@
 "login.button.title" = "Entrar";
 "login.label.emailTextField" = "E-mail";
 "login.label.passwordTextField" = "Senha";
+
+
+/* MARK - HOME Screen */
+"home.welcome.label" = "Boas Vindas";
+"home.feedback.button.title" = "Avaliar";
